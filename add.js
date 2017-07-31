@@ -11,7 +11,7 @@ function show(a){
                               <div class="card-block">
                                 <h4 class="card-title">${from}</h4>
                                 <p class="card-text">${message}</p>
-                                <a class="btn aref btn-primary">Delete</a>
+                                <button class="btn aref btn-primary">Delete</button>
                               </div>
                             </div>`
 
@@ -33,48 +33,31 @@ Chat.loadmsg(show);
 var input = document.getElementById('inputMess');
 var add = document.getElementById('add');
 var kill = document.getElementById('kill')
-input.onkeydown = enterpressalert;
-function enterpressalert(e){
+input.onkeydown= enter;
+
+function enter(e){
 
 		if(e.keyCode == 13) {
 		    console.log('hi');
 		 printToDom();
 		}
 }
+
 function printToDom(){
 	let content = document.createElement("div");
 	content.setAttribute("class", "card col-md-3");
+	content.setAttribute("style", "width: 20rem");
 	content.innerHTML = 
 	`<div class='card-block'>
 	<h4 class='card-title'>Random Guy</h4>
 	<p class='card-text'>${input.value}</p>
-	<a href='#' class='btn are btn-primary'>Delete</a>
+	<button class='are btn btn-primary'>Delete</button>
 	</div></div>`;
 
     document.getElementById("messageBoard").append(content);
-            document.getElementsByClassName("are")[0].addEventListener("click",function() {
-                this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
-            })
-                
-
-        
-                            	
+    let y = document.getElementsByClassName("are");
+    	                      
+    document.getElementsByClassName("are")[y.length-1].addEventListener("click",function() {
+        this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+    })                      	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
