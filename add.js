@@ -59,26 +59,5 @@ function printToDom(){
     	                      
     document.getElementsByClassName("are")[y.length-1].addEventListener("click",function() {
         this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
-    })            
-
-        
-                            	
+    })                      	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
