@@ -33,7 +33,7 @@ Chat.loadmsg(show);
 var input = document.getElementById('inputMess');
 var add = document.getElementById('add');
 var kill = document.getElementById('kill')
-add.addEventListener("click", printToDom);
+input.onkeydown = enterpressalert;
 function enterpressalert(e){
 
 		if(e.keyCode == 13) {
@@ -48,11 +48,13 @@ function printToDom(){
 	`<div class='card-block'>
 	<h4 class='card-title'>Random Guy</h4>
 	<p class='card-text'>${input.value}</p>
-	<button href='# class=btn are btn-primary'>Delete</button>
+	<a href='#' class='btn are btn-primary'>Delete</a>
 	</div></div>`;
 
     document.getElementById("messageBoard").append(content);
-                          
+            document.getElementsByClassName("are")[0].addEventListener("click",function() {
+                this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+            })
                 
 
         
