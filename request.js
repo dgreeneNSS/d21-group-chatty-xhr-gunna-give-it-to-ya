@@ -29,9 +29,27 @@ var Chat = (function(){
 //        console.log("x", x[0].from);
         console.log("length", x.length);
         x.forEach(function(element){
-            
-            console.log(element.from);
-        })
+            let from = element.from;
+            let message = element.message;
+            document.getElementById("messageBoard").innerHTML += 
+                            `<div class="card col-md-3" style="width: 20rem;">
+                              <div class="card-block">
+                                <h4 class="card-title">${from}</h4>
+                                <p class="card-text">${message}</p>
+                                <a href="#" class="btn btn-primary">Delete</a>
+                              </div>
+                            </div>`
+
+                        
+        });
+        for (var i = 0; i < x.length; i++) {
+            document.getElementsByClassName("btn")[i].addEventListener("click",function() {
+                this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+            })
+                
+
+        }
     }
 };
 
+window.addEventListener("load",Chat.addmsg);
