@@ -53,14 +53,18 @@ function enter(e){
 		    console.log('hi');
 		 printToDom();
 		}
-}
+};
+
+var monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
 
 
 function printToDom(){
 	let content = document.createElement("div");
 	content.setAttribute("class", "af card col-md-12");
 	let today = new Date
-	let date = (today.getMonth()+1)+'-'+today.getDate();
+
+	let date = monthNames[today.getMonth()]+' '+today.getDate();
     let time = today.getHours() + ":" + today.getMinutes();
     let dateTime = date+' '+time;
 	content.innerHTML = 
