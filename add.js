@@ -79,21 +79,21 @@ function printToDom(){
 var darkTheme = document.getElementById('tog1');
 darkTheme.addEventListener('click', ()=>{
 let body = document.getElementsByClassName('container')[0];
-let div = document.getElementById('messageBoard');
+let div = document.getElementById('XX');
 
 if (darkTheme.checked === true){
     body.classList.toggle('darkTheme'); 
-    div.classList.toggle('card::after')
+    div.classList.toggle('darkTheme')
 }else{
     body.classList.remove('darkTheme');
-    div.classList.remove('card::after')
+    div.classList.remove('darkTheme');
 }  
 }
 );
     
 var bigTheme = document.getElementById('tog2');
 bigTheme.addEventListener('click', ()=>{
-let div = document.getElementById('messageBoard');
+let div = document.getElementById('XX');
 if (bigTheme.checked === true){
     div.classList.toggle('focused');  
 }else{

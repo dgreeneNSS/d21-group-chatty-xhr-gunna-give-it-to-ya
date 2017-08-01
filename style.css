@@ -25,14 +25,10 @@
 }
 
 .darkTheme {
-    background-color: gray;
-    color:gold;
+    background-image: url(dmxx.jpg);
+    color:whitesmoke;
 }
 
 .focused {
     font-size: 2em;
-}
-
-.card::after{
-    background-color: grey; 
 }
