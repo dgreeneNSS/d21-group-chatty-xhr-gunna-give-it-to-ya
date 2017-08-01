@@ -23,6 +23,7 @@ function show(a){
         for (var i = 0; i < a.length; i++) {
             document.getElementsByClassName("aref")[i].addEventListener("click",function() {
                 this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+                checkIfEmpty(); 
             })
                 
 
@@ -72,8 +73,10 @@ function printToDom(){
     	                      
     document.getElementsByClassName("are")[y.length-1].addEventListener("click",function() {
         this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+        checkIfEmpty();                       	
     })         
-    a+=1;                        	
+    a+=1;
+    checkIfEmpty()
 };
 
 var darkTheme = document.getElementById('tog1');
@@ -114,8 +117,41 @@ kill.addEventListener('click',()=>{
     let div = document.getElementById('messageBoard');
     div.innerHTML = "";
     Chat.clearmsg();
+    checkIfEmpty();
 });
+
+function checkIfEmpty() {
+    let div = document.getElementById('messageBoard');
+    if (div.innerHTML !== "") {
+        kill.removeAttribute("disabled");
+    }else if (div.innerHTML === "") {
+        kill.setAttribute("disabled", true);
+    };
+}
+
+
+function check20() {
+    let div = document.getElementById('messageBoard').length;
+
+}
+
+
+
+
 //if (){};
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     
     
