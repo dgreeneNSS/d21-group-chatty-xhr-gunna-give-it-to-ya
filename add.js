@@ -1,3 +1,5 @@
+var a = 1;
+
 function show(a){
         
 
@@ -7,7 +9,7 @@ function show(a){
             let from = element.from;
             let message = element.message;
             document.getElementById("messageBoard").innerHTML += 
-                            `<div class="card col-md-3" style="width: 20rem;">
+                            `<div class="card col-md-3">
                               <div class="card-block">
                                 <h4 class="card-title">${from}</h4>
                                 <p class="card-text">${message}</p>
@@ -34,6 +36,13 @@ var input = document.getElementById('inputMess');
 var add = document.getElementById('add');
 var kill = document.getElementById('kill')
 input.onkeydown= enter;
+input.onfocus = check;
+
+function check() {
+	if(document.getElementsByClassName("are").length===0){
+		a=1;
+	}
+}
 
 function enter(e){
 
@@ -43,13 +52,15 @@ function enter(e){
 		}
 }
 
+
 function printToDom(){
 	let content = document.createElement("div");
 	content.setAttribute("class", "card col-md-3");
-	content.setAttribute("style", "width: 20rem");
+	let date = new Date
+	let currenttime = date.toString().replace("GMT-0500 (Central Daylight Time)"," ");
 	content.innerHTML = 
 	`<div class='card-block'>
-	<h4 class='card-title'>Random Guy</h4>
+	<h4 class='card-title'>Post#${a}@ ${currenttime}</h4>
 	<p class='card-text'>${input.value}</p>
 	<button class='are btn btn-primary'>Delete</button>
 	</div></div>`;
@@ -59,5 +70,6 @@ function printToDom(){
     	                      
     document.getElementsByClassName("are")[y.length-1].addEventListener("click",function() {
         this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
-    })                      	
+    })         
+    a+=1;                        	
 }
