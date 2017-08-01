@@ -133,14 +133,36 @@ function checkIfEmpty() {
 
 
 function check20() {
-    let div = document.getElementById('messageBoard').length;
+    let div = document.getElementsByClassName('card');
+    let content = "";
+    let infofull;
+    let info20;
+    for (var i = 0; i < div.length; i++){
+    div[i].classList.add("af", "col-md-12");
+        
+        infofull = div[i];
 
-}
+        infofull.innerHTML += div[i].innerHTML;
+
+ 
+        if (i > 0){
+//            div[i].classList.add("af", "col-md-12");
+            info20=div[i];
+            console.log(info20);
+
+            
+  
+    content+= info20;
+    };
+            
+    }
+    console.log(content);
+    document.getElementById('messageBoard').innerHTML = content;
+};
 
 
 
 
-//if (){};
 
 
 
@@ -154,7 +176,12 @@ function check20() {
 
 
 
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
