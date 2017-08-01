@@ -32,3 +32,12 @@
 .focused {
     font-size: 2em;
 }
+
+.af{
+    background-color: #fd723e; 
+    opacity: .5;
+}
+.as {
+    background-color:#666F7F;
+    opacity: .5;
+}

@@ -16,10 +16,10 @@ var Chat = (function(){
     getmsg: function(){
 //        console.log('hello', msg);
         return msg;
-    }
-    // clearmsg: function() {
-    //     msg =[];
-    // }
+    },
+     clearmsg: function() {
+         msg =[];
+     }
 }
 })();
 

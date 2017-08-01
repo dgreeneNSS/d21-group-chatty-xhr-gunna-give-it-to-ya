@@ -9,11 +9,11 @@ function show(a){
             let from = element.from;
             let message = element.message;
             document.getElementById("messageBoard").innerHTML += 
-                            `<div class="card col-md-3">
+                            `<div class="af card col-md-12">
                               <div class="card-block">
                                 <h4 class="card-title">${from}</h4>
                                 <p class="card-text">${message}</p>
-                                <button class="btn aref btn-primary">Delete</button>
+                                <button class="btn aref btn-primary btn-sm">Delete</button>
                               </div>
                             </div>`
 
@@ -55,7 +55,7 @@ function enter(e){
 
 function printToDom(){
 	let content = document.createElement("div");
-	content.setAttribute("class", "card col-md-3");
+	content.setAttribute("class", "af card col-md-12");
 	let today = new Date
 	let date = (today.getMonth()+1)+'-'+today.getDate();
     let time = today.getHours() + ":" + today.getMinutes();
@@ -64,7 +64,7 @@ function printToDom(){
 	`<div class='card-block'>
 	<h4 class='card-title'>Post #${a} <br> ${dateTime}</h4>
 	<p class='card-text'>${input.value}</p>
-	<button class='are btn btn-primary'>Delete</button>
+	<button class='are btn btn-primary btn-sm'>Delete</button>
 	</div></div>`;
 
     document.getElementById("messageBoard").append(content);
@@ -79,21 +79,28 @@ function printToDom(){
 var darkTheme = document.getElementById('tog1');
 darkTheme.addEventListener('click', ()=>{
 let body = document.getElementsByClassName('container')[0];
-let div = document.getElementById('XX');
+let div = document.getElementsByClassName('card');
+console.log('div', div);
 
 if (darkTheme.checked === true){
-    body.classList.toggle('darkTheme'); 
-    div.classList.toggle('darkTheme')
+    body.classList.toggle('darkTheme');
+        console.log('a', a);
+    for (var i = 0; i < div.length; i++){
+    div[i].classList.toggle('as');
+    };
 }else{
     body.classList.remove('darkTheme');
-    div.classList.remove('darkTheme');
-}  
+    for (var i = 0; i < div.length; i++){
+    div[i].classList.remove('as');
+    };
+}
+   
 }
 );
     
 var bigTheme = document.getElementById('tog2');
 bigTheme.addEventListener('click', ()=>{
-let div = document.getElementById('XX');
+let div = document.getElementById('messageBoard');
 if (bigTheme.checked === true){
     div.classList.toggle('focused');  
 }else{
@@ -101,9 +108,14 @@ if (bigTheme.checked === true){
 }  
 }
 );
-    
+  
 
-    
+kill.addEventListener('click',()=>{
+    let div = document.getElementById('messageBoard');
+    div.innerHTML = "";
+    Chat.clearmsg();
+});
+//if (){};
     
     
     
