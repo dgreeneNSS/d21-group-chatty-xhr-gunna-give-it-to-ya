@@ -17,6 +17,9 @@ var Chat = (function(){
 //        console.log('hello', msg);
         return msg;
     }
+    // clearmsg: function() {
+    //     msg =[];
+    // }
 }
 })();
 
@@ -24,5 +27,6 @@ var Chat = (function(){
 
 
     
+
 
 

@@ -6,3 +6,7 @@
 	visibility: hidden;
 	margin-bottom:1em;
 }
+
+.navbar {
+	opacity:.5;
+}
