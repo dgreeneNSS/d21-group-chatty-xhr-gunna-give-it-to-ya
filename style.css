@@ -10,3 +10,29 @@
 .navbar {
 	opacity:.5;
 }
+
+
+.dark {
+    color: red;
+}
+
+.logo {
+    height: 80px;
+}
+
+#messageBoard {
+    word-wrap: break-word;
+}
+
+.darkTheme {
+    background-color: gray;
+    color:gold;
+}
+
+.focused {
+    font-size: 2em;
+}
+
+.card::after{
+    background-color: grey; 
+}

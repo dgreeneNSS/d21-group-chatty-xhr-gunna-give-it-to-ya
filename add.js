@@ -56,11 +56,13 @@ function enter(e){
 function printToDom(){
 	let content = document.createElement("div");
 	content.setAttribute("class", "card col-md-3");
-	let date = new Date
-	let currenttime = date.toString().replace("GMT-0500 (Central Daylight Time)"," ");
+	let today = new Date
+	let date = (today.getMonth()+1)+'-'+today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes();
+    let dateTime = date+' '+time;
 	content.innerHTML = 
 	`<div class='card-block'>
-	<h4 class='card-title'>Post#${a}@ ${currenttime}</h4>
+	<h4 class='card-title'>Post #${a} <br> ${dateTime}</h4>
 	<p class='card-text'>${input.value}</p>
 	<button class='are btn btn-primary'>Delete</button>
 	</div></div>`;
@@ -72,4 +74,37 @@ function printToDom(){
         this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
     })         
     a+=1;                        	
+};
+
+var darkTheme = document.getElementById('tog1');
+darkTheme.addEventListener('click', ()=>{
+let body = document.getElementsByClassName('container')[0];
+let div = document.getElementById('messageBoard');
+
+if (darkTheme.checked === true){
+    body.classList.toggle('darkTheme'); 
+    div.classList.toggle('card::after')
+}else{
+    body.classList.remove('darkTheme');
+    div.classList.remove('card::after')
+}  
 }
+);
+    
+var bigTheme = document.getElementById('tog2');
+bigTheme.addEventListener('click', ()=>{
+let div = document.getElementById('messageBoard');
+if (bigTheme.checked === true){
+    div.classList.toggle('focused');  
+}else{
+    div.classList.remove('focused');
+}  
+}
+);
+    
+
+    
+    
+    
+    
+    
