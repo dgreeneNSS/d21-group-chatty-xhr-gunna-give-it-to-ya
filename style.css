@@ -1,5 +1,7 @@
 .card {
 	border:1px solid red;
+	margin-bottom: 5px;
+	border-radius: 10px;
 }
 
 .hidden {
@@ -7,9 +9,9 @@
 	margin-bottom:1em;
 }
 
-.navbar {
+/*.navbar {
 	opacity:.5;
-}
+}*/
 
 
 .dark {
@@ -33,11 +35,23 @@
     font-size: 2em;
 }
 
-.af{
+.af {
     background-color: #fd723e; 
-    opacity: .5;
+    opacity: .8;
 }
 .as {
     background-color:#666F7F;
     opacity: .5;
+}
+
+@media (max-width: 1000px) {
+    .fixed-top {
+        position:static;
+    }
+    .hidden, nav {
+        margin-bottom:0;
+    }
+    .hidden {
+        position:fixed;
+    }
 }
