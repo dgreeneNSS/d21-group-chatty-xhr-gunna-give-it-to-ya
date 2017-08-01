@@ -55,3 +55,28 @@
         position:fixed;
     }
 }
+
+.dark {
+    border: solid orange 3px;
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 20px;
+}
+.large {
+    border: solid orange 3px;
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.form-control{
+    width: 40%;
+}
+
+input[type="checkbox"]{
+    display: inline-block;
+    margin-left: 1em;
+}
+
+
+
