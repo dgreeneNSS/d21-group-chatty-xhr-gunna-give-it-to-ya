@@ -39,6 +39,8 @@ var kill = document.getElementById('kill')
 input.onkeydown= enter;
 input.onfocus = check;
 
+add.onclick = printToDom;
+
 function check() {
 	if(document.getElementsByClassName("are").length===0){
 		a=1;
