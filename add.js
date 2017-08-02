@@ -2,11 +2,10 @@ var count = 1;
 var users = {
   names: ["Guest","DMX"]
 };
+var isEditing = false;
 var username;
 var audio = new Audio('dog.mp3');
-
 function show(a){
-
         a.forEach(function(element){
             let from = element.from;
             let message = element.message;
@@ -18,18 +17,13 @@ function show(a){
                                 <button class="btn aref btn-danger btn-sm">Delete</button>
                                 <button class="btn edit btn-primary btn-sm">Edit</button>
                               </div>
-                            </div>`
-
-                        
+                            </div>`            
         });
-
-        for (var i = 0; i < a.length; i++) {
-            document.getElementsByClassName("aref")[i].addEventListener("click",function() {
-                this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+    
+        for (var i = 0; i < document.getElementsByClassName('aref').length; i++) {
+            document.getElementsByClassName("aref")[i].addEventListener("click",function() { this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
                 checkIfEmpty(); 
             })
-                
-
         }
 
     for (var i = 0; i < document.getElementsByClassName("edit").length; i++) {
@@ -38,7 +32,6 @@ function show(a){
                     say.focus();
                     let guy = event.target.parentNode.children[1].innerHTML
 //                    console.log("", guy);
-
 //                    console.log('d', x);
                     say.value = guy;
 //                    console.log('eee', say.value);
@@ -47,38 +40,33 @@ function show(a){
                     
                 } 
                 say.addEventListener("keydown", edits);
-                                
-             
-                        };
-                           
-
-            
+                        };     
     }
 Chat.loadmsg(show);
 
 var input = document.getElementById('inputMess');
 var add = document.getElementById('add');
-var kill = document.getElementById('kill')
-//input.onkeydown= enter;
-input.onfocus = check;
+var kill = document.getElementById('kill');
 
+input.onkeydown = enter;
+
+input.onfocus = check;
 add.addEventListener("click",()=>{
     check();
     printToDom();
     
 });
-
 function check() {
 	if(document.getElementsByClassName("are").length===0){
 	count=1;
 	}
 }
 
-////function enter(e){
-////		if(e.keyCode == 13) {
-////		 printToDom();
-////		}
-//};
+function enter(e){
+		if(e.keyCode == 13 && isEditing === false) {
+		 printToDom();
+		}
+};
 
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"];
@@ -126,17 +114,15 @@ function printToDom(){
                     say.focus();
                     let guy = event.target.parentNode.children[1].innerHTML
 //                    console.log("", guy);
-
 //                    console.log('d', x);
                     say.value = guy;
 //                    console.log('eee', say.value);
                     arr = this;
                     console.log('we', arr.parentNode.children[1].innerHTML);
+                    isEditing = true;
                     
                 } 
                 say.addEventListener("keydown", edits);
-                                
-             
                         };
                             
     count+=1;
@@ -145,38 +131,22 @@ function printToDom(){
     // input.value='';
     input.focus();
 };
-
 function edits(event){
-  
-                        
-//                            var arr = this
-                        if(event.keyCode == 13) {
-                            console.log('2', arr);
-                            arr.parentNode.children[1].innerHTML = document.getElementById('inputMess').value;
-                            
-//                            say.removeEventListener("keydown", edits);
-//                            say.removeEventListener("keydown", edits);
-                        }
-
-                    }
-
-
-
+//var arr = this
+    if(event.keyCode == 13 && isEditing === true) {
+        console.log('2', arr);
+        arr.parentNode.children[1].innerHTML = document.getElementById('inputMess').value;
+        isEditing = false;
+    }}
 
 var darkTheme = document.getElementById('tog1');
 darkTheme.addEventListener('click', ()=>{
 let msgbrd = document.getElementById('messageBoard');
 let div = document.getElementsByClassName('card');
 
-    
 if (darkTheme.checked === true){
-
     document.getElementsByClassName("body")[0].classList.toggle('darkTheme');
-    
-    
     audio.play();
-    
-    
     msgbrd.classList.toggle('grey');
     for (var i = 0; i < div.length; i++){
     div[i].classList.toggle('as');
@@ -189,11 +159,8 @@ if (darkTheme.checked === true){
     for (var i = 0; i < div.length; i++){
     div[i].classList.remove('as');
     };
-}
-   
-}
-);
-    
+}});
+
 var bigTheme = document.getElementById('tog2');
 bigTheme.addEventListener('click', ()=>{
 let div = document.getElementById('messageBoard');
@@ -233,36 +200,10 @@ function check20() {
                 document.getElementById("messageBoard").removeChild(document.getElementById("messageBoard").lastChild)
             }
             
-            oldpost.push(content);
-                
-            
-            // document.getElementById("messageBoard").appendChild(content);
-            // oldmsgs.addEventListener("click", function(){
-                
-            //         document.getElementById("messageBoard").removeChild(document.getElementById("messageBoard").lastChild);
-                
-            //     oldpost.forEach((a)=>{
-            //         console.log("", a);
-                        
-            //         // document.getElementById("messageBoard").appendChild(a);
-            //     }) 
-
-
-                
-            
-                    
+            oldpost.push(content);                    
             };
-            // document.getElementById("messageBoard").appendChild(oldpost[oldpost.length-1]);
-            
          };           
-    
-
-
-
-
-
 };
-
 ///////////////////Modal JS///////////////////////////
 document.getElementById("themechange").addEventListener("click",()=> {
     var bgcolor;
@@ -277,27 +218,4 @@ document.getElementById("themechange").addEventListener("click",()=> {
         a.style.backgroundColor=cardcolor;
     });                             
     document.getElementById("themechange").setAttribute("data-dismiss","modal");   
-})
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});

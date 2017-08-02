@@ -2,18 +2,12 @@
 	border:1px solid black;
 	margin-bottom: 5px;
 	border-radius: 10px;
-
 }
 
 .hidden {
 	visibility: hidden;
 	margin-bottom:1em;
 }
-
-/*.navbar {
-	opacity:.5;
-}*/
-
 
 .dark {
     color: red;
