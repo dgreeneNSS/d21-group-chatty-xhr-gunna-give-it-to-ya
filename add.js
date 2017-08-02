@@ -37,15 +37,19 @@ function show(a){
                     let say = document.getElementById("inputMess");
                     say.focus();
                     let guy = event.target.parentNode.children[1].innerHTML
+                    console.log("", guy);
+                        
                     var x = this;
 //                    console.log('d', x);
                     say.value = guy;
 //                    console.log('eee', say.value);
                     say.addEventListener("keydown", function(event){
-                        console.log('hi');
+   
                         if(event.keyCode == 13) {
-                            console.log('hi');
+
                             x.parentNode.children[1].innerHTML = document.getElementById('inputMess').value;
+                            console.log("", x.parentNode.children[1]);
+                                
                             
                         }});
                     }}
@@ -91,7 +95,7 @@ function checkname() {
         return username
     }
 }
-
+var say= document.getElementById("inputMess");
 function printToDom(){
     let name = checkname();
 	let content = document.createElement("div");
@@ -116,32 +120,42 @@ function printToDom(){
         this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
         checkIfEmpty();                       	
     })
+    
     for (var i = 0; i < document.getElementsByClassName("edit").length; i++) {
             document.getElementsByClassName("edit")[i].addEventListener("click", edit)
                 function edit(){
-                    let say = document.getElementById("inputMess");
                     say.focus();
                     let guy = event.target.parentNode.children[1].innerHTML
-                    var x = this;
+                    console.log("", guy);
+                        
+
 //                    console.log('d', x);
                     say.value = guy;
 //                    console.log('eee', say.value);
-                    say.addEventListener("keydown", function(event){
-                        console.log('hi');
-                        if(event.keyCode == 13) {
-                            console.log('hi');
-                            x.parentNode.children[1].innerHTML = document.getElementById('inputMess').value;
+                    
+                } 
+                say.addEventListener("keydown", edits);
+                                
+             
+                        };
                             
-                        }});
-                    }}         
     count+=1;
     checkIfEmpty();
     check20();
-    input.value='';
+    // input.value='';
     input.focus();
 };
 
+function edits(event){
+  
+                        if(event.keyCode == 13) {
+                            let arr = this
+                            arr.innerHTML = document.getElementById('inputMess').value;
+                            
+                            say.removeEventListener("keydown", edits);
+                        }
 
+                    }
 
 
 
