@@ -1,7 +1,8 @@
 .card {
-	border:1px solid red;
+	border:1px solid black;
 	margin-bottom: 5px;
 	border-radius: 10px;
+
 }
 
 .hidden {
@@ -17,6 +18,11 @@
 .dark {
     color: red;
 }
+.grey{
+	background-color: grey;
+	opacity: .7;
+	color:whitesmoke;
+}
 
 .logo {
     height: 80px;
@@ -28,7 +34,7 @@
 
 .darkTheme {
     background-image: url(dmxx.jpg);
-    color:whitesmoke;
+    
 }
 
 .focused {
@@ -78,5 +84,39 @@ input[type="checkbox"]{
     margin-left: 1em;
 }
 
+#user{
+	display:inline-block;
+	background-color: black;
+	border-radius:4px;
+	color:white;
+	font-weight:bolder;
+	padding-left:1em;
+	padding-right:1em;
+	opacity:.8;
+}
+ul {
+	display:inline-block;
+}
+html {
+	overflow-y:auto;
+}
+.modal {
+	background-color:rgba(237, 186, 33,0.3);
+	overflow-y:scroll;
+}
+.modal-open {
+	overflow:auto;
+}
+.clearfix {
+	display:inline-block;
+}
 
+.fades {
+   opacity: 1;
+   transition: opacity .5s ease-in-out;
+   }
+
+.fades:hover {
+      opacity: 0.5;
+}
 

@@ -1,19 +1,21 @@
-var a = 1;
+var count = 1;
+var users = {
+  names: ["Guest","DMX"]
+};
+var username;
 
 function show(a){
-        
 
-//        console.log("x", x[0].from);
-        console.log("length", a);
         a.forEach(function(element){
             let from = element.from;
             let message = element.message;
             document.getElementById("messageBoard").innerHTML += 
-                            `<div class="af card col-md-12">
+                            `<div class="af card col-md-12 fades">
                               <div class="card-block">
                                 <h4 class="card-title">${from}</h4>
                                 <p class="card-text">${message}</p>
-                                <button class="btn aref btn-primary btn-sm">Delete</button>
+                                <button class="btn aref btn-danger btn-sm">Delete</button>
+                                <button class="btn edit btn-primary btn-sm">Edit</button>
                               </div>
                             </div>`
 
@@ -29,6 +31,25 @@ function show(a){
 
         }
 
+        for (var i = 0; i < document.getElementsByClassName("edit").length; i++) {
+            document.getElementsByClassName("edit")[i].addEventListener("click", edit)
+                function edit(){
+                    let say = document.getElementById("inputMess");
+                    say.focus();
+                    let guy = event.target.parentNode.children[1].innerHTML
+                    var x = this;
+//                    console.log('d', x);
+                    say.value = guy;
+//                    console.log('eee', say.value);
+                    say.addEventListener("keydown", function(event){
+                        console.log('hi');
+                        if(event.keyCode == 13) {
+                            console.log('hi');
+                            x.parentNode.children[1].innerHTML = document.getElementById('inputMess').value;
+                            
+                        }});
+                    }}
+
             
     }
 Chat.loadmsg(show);
@@ -39,18 +60,20 @@ var kill = document.getElementById('kill')
 input.onkeydown= enter;
 input.onfocus = check;
 
-add.onclick = printToDom;
+add.addEventListener("click",()=>{
+    check();
+    printToDom();
+    
+});
 
 function check() {
 	if(document.getElementsByClassName("are").length===0){
-		a=1;
+	count=1;
 	}
 }
 
 function enter(e){
-
 		if(e.keyCode == 13) {
-		    console.log('hi');
 		 printToDom();
 		}
 };
@@ -58,47 +81,87 @@ function enter(e){
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"];
 
+function checkname() {
+    if (document.getElementById("radio1").checked===true) {
+        username = users.names[0];
+        return username
+    }
+    else {
+        username = users.names[1];
+        return username
+    }
+}
 
 function printToDom(){
+    let name = checkname();
 	let content = document.createElement("div");
-	content.setAttribute("class", "af card col-md-12");
+	content.setAttribute("class", "af card col-md-12 fades");
 	let today = new Date
 
 	let date = monthNames[today.getMonth()]+' '+today.getDate();
     let time = today.getHours() + ":" + today.getMinutes();
-    let dateTime = date+' '+time;
+    let dateTime = date+`-`+time;
 	content.innerHTML = 
 	`<div class='card-block'>
-	<h4 class='card-title'>Post #${a} <br> ${dateTime}</h4>
+	<h4 class='card-title'>Post #${count} <br> ${dateTime}<br> <strong>BY: ${name}</strong></h4>
 	<p class='card-text'>${input.value}</p>
-	<button class='are btn btn-primary btn-sm'>Delete</button>
+	<button class='are btn btn-danger btn-sm'>Delete</button>
+    <button class="btn edit btn-primary btn-sm">Edit</button>
 	</div></div>`;
 
-    document.getElementById("messageBoard").append(content);
+    document.getElementById("messageBoard").prepend(content);
     let y = document.getElementsByClassName("are");
     	                      
-    document.getElementsByClassName("are")[y.length-1].addEventListener("click",function() {
+    document.getElementsByClassName("are")[0].addEventListener("click",function() {          
         this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
         checkIfEmpty();                       	
-    })         
-    a+=1;
-    checkIfEmpty()
+    })
+    for (var i = 0; i < document.getElementsByClassName("edit").length; i++) {
+            document.getElementsByClassName("edit")[i].addEventListener("click", edit)
+                function edit(){
+                    let say = document.getElementById("inputMess");
+                    say.focus();
+                    let guy = event.target.parentNode.children[1].innerHTML
+                    var x = this;
+//                    console.log('d', x);
+                    say.value = guy;
+//                    console.log('eee', say.value);
+                    say.addEventListener("keydown", function(event){
+                        console.log('hi');
+                        if(event.keyCode == 13) {
+                            console.log('hi');
+                            x.parentNode.children[1].innerHTML = document.getElementById('inputMess').value;
+                            
+                        }});
+                    }}         
+    count+=1;
+    checkIfEmpty();
+    check20();
+    input.value='';
+    input.focus();
 };
+
+
+
+
+
 
 var darkTheme = document.getElementById('tog1');
 darkTheme.addEventListener('click', ()=>{
-let body = document.getElementsByClassName('container')[0];
+let msgbrd = document.getElementById('messageBoard');
 let div = document.getElementsByClassName('card');
-console.log('div', div);
 
 if (darkTheme.checked === true){
-    body.classList.toggle('darkTheme');
-        console.log('a', a);
+    document.getElementsByClassName("body")[0].classList.toggle('darkTheme');
+        
+    msgbrd.classList.toggle('grey');
     for (var i = 0; i < div.length; i++){
     div[i].classList.toggle('as');
     };
 }else{
-    body.classList.remove('darkTheme');
+    document.getElementsByClassName("body")[0].classList.remove('darkTheme');
+    msgbrd.classList.remove('grey');
+
     for (var i = 0; i < div.length; i++){
     div[i].classList.remove('as');
     };
@@ -118,7 +181,6 @@ if (bigTheme.checked === true){
 }
 );
   
-
 kill.addEventListener('click',()=>{
     let div = document.getElementById('messageBoard');
     div.innerHTML = "";
@@ -134,39 +196,65 @@ function checkIfEmpty() {
         kill.setAttribute("disabled", true);
     };
 }
-
-
+var oldpost=[];
 function check20() {
+    let content;
     let div = document.getElementsByClassName('card');
-    let content = "";
-    let infofull;
-    let info20;
-    for (var i = 0; i < div.length; i++){
-    div[i].classList.add("af", "col-md-12");
-        
-        infofull = div[i];
-
-        infofull.innerHTML += div[i].innerHTML;
-
- 
-        if (i > 0){
-//            div[i].classList.add("af", "col-md-12");
-            info20=div[i];
-            console.log(info20);
-
+    let readmore=document.createElement("div");
+    readmore.innerHTML = `<button type="button">press</button>`;
+    for (var i = div.length-1;i<=div.length; i++){
+        if (i > 20){
+            content = div[i-1];
+            for (var j =i; j<i+1;j++) {
+                document.getElementById("messageBoard").removeChild(document.getElementById("messageBoard").lastChild)
+            }
             
-  
-    content+= info20;
-    };
+            oldpost.push(content);
+                
             
-    }
-    console.log(content);
-    document.getElementById('messageBoard').innerHTML = content;
+            // document.getElementById("messageBoard").appendChild(content);
+            // oldmsgs.addEventListener("click", function(){
+                
+            //         document.getElementById("messageBoard").removeChild(document.getElementById("messageBoard").lastChild);
+                
+            //     oldpost.forEach((a)=>{
+            //         console.log("", a);
+                        
+            //         // document.getElementById("messageBoard").appendChild(a);
+            //     }) 
+
+
+                
+            
+                    
+            };
+            // document.getElementById("messageBoard").appendChild(oldpost[oldpost.length-1]);
+            
+         };           
+    
+
+
+
+
+
 };
 
-
-
-
+///////////////////Modal JS///////////////////////////
+document.getElementById("themechange").addEventListener("click",()=> {
+    var bgcolor;
+    var fontcolor;
+    var cardcolor;
+    bgcolor = document.getElementById("bgcolor").value;
+    fontcolor = document.getElementById("fontcolor").value;
+    cardcolor = document.getElementById("cardcolor").value;     
+    document.getElementById("body").style.backgroundColor=bgcolor;
+    document.getElementById("messageBoard").style.color=fontcolor;
+    document.getElementById("messageBoard").childNodes.forEach((a)=>{
+        a.style.backgroundColor=cardcolor;
+    });                             
+    document.getElementById("themechange").setAttribute("data-dismiss","modal");   
+})
+    
 
 
 
