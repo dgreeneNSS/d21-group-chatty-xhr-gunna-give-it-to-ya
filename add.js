@@ -2,6 +2,7 @@ var count = 1;
 var users = {
   names: ["Guest","DMX"]
 };
+var isEditing = false;
 var username;
 var audio = new Audio('dog.mp3');
 function show(a){
@@ -45,8 +46,10 @@ Chat.loadmsg(show);
 
 var input = document.getElementById('inputMess');
 var add = document.getElementById('add');
-var kill = document.getElementById('kill')
-//input.onkeydown= enter;
+var kill = document.getElementById('kill');
+
+input.onkeydown = enter;
+
 input.onfocus = check;
 add.addEventListener("click",()=>{
     check();
@@ -58,11 +61,12 @@ function check() {
 	count=1;
 	}
 }
-////function enter(e){
-////		if(e.keyCode == 13) {
-////		 printToDom();
-////		}
-//};
+
+function enter(e){
+		if(e.keyCode == 13 && isEditing === false) {
+		 printToDom();
+		}
+};
 
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"];
@@ -115,6 +119,7 @@ function printToDom(){
 //                    console.log('eee', say.value);
                     arr = this;
                     console.log('we', arr.parentNode.children[1].innerHTML);
+                    isEditing = true;
                     
                 } 
                 say.addEventListener("keydown", edits);
@@ -126,12 +131,12 @@ function printToDom(){
     // input.value='';
     input.focus();
 };
-
 function edits(event){
 //var arr = this
-    if(event.keyCode == 13) {
+    if(event.keyCode == 13 && isEditing === true) {
         console.log('2', arr);
         arr.parentNode.children[1].innerHTML = document.getElementById('inputMess').value;
+        isEditing = false;
     }}
 
 var darkTheme = document.getElementById('tog1');
