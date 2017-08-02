@@ -3,6 +3,7 @@ var users = {
   names: ["Guest","DMX"]
 };
 var username;
+var audio = new Audio('dog.mp3');
 
 function show(a){
 
@@ -31,28 +32,25 @@ function show(a){
 
         }
 
-        for (var i = 0; i < document.getElementsByClassName("edit").length; i++) {
+    for (var i = 0; i < document.getElementsByClassName("edit").length; i++) {
             document.getElementsByClassName("edit")[i].addEventListener("click", edit)
                 function edit(){
-                    let say = document.getElementById("inputMess");
                     say.focus();
                     let guy = event.target.parentNode.children[1].innerHTML
-                    console.log("", guy);
-                        
-                    var x = this;
+//                    console.log("", guy);
+
 //                    console.log('d', x);
                     say.value = guy;
 //                    console.log('eee', say.value);
-                    say.addEventListener("keydown", function(event){
-   
-                        if(event.keyCode == 13) {
-
-                            x.parentNode.children[1].innerHTML = document.getElementById('inputMess').value;
-                            console.log("", x.parentNode.children[1]);
+                    arr = this;
+                    console.log('we', arr.parentNode.children[1].innerHTML);
+                    
+                } 
+                say.addEventListener("keydown", edits);
                                 
-                            
-                        }});
-                    }}
+             
+                        };
+                           
 
             
     }
@@ -157,6 +155,7 @@ function edits(event){
                             arr.parentNode.children[1].innerHTML = document.getElementById('inputMess').value;
                             
 //                            say.removeEventListener("keydown", edits);
+//                            say.removeEventListener("keydown", edits);
                         }
 
                     }
@@ -169,9 +168,15 @@ darkTheme.addEventListener('click', ()=>{
 let msgbrd = document.getElementById('messageBoard');
 let div = document.getElementsByClassName('card');
 
+    
 if (darkTheme.checked === true){
+
     document.getElementsByClassName("body")[0].classList.toggle('darkTheme');
-        
+    
+    
+    audio.play();
+    
+    
     msgbrd.classList.toggle('grey');
     for (var i = 0; i < div.length; i++){
     div[i].classList.toggle('as');
@@ -179,6 +184,7 @@ if (darkTheme.checked === true){
 }else{
     document.getElementsByClassName("body")[0].classList.remove('darkTheme');
     msgbrd.classList.remove('grey');
+    audio.pause();
 
     for (var i = 0; i < div.length; i++){
     div[i].classList.remove('as');
