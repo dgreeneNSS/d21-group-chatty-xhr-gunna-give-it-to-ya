@@ -61,7 +61,7 @@ Chat.loadmsg(show);
 var input = document.getElementById('inputMess');
 var add = document.getElementById('add');
 var kill = document.getElementById('kill')
-input.onkeydown= enter;
+//input.onkeydown= enter;
 input.onfocus = check;
 
 add.addEventListener("click",()=>{
@@ -76,11 +76,11 @@ function check() {
 	}
 }
 
-function enter(e){
-		if(e.keyCode == 13) {
-		 printToDom();
-		}
-};
+////function enter(e){
+////		if(e.keyCode == 13) {
+////		 printToDom();
+////		}
+//};
 
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"];
@@ -95,6 +95,7 @@ function checkname() {
         return username
     }
 }
+var arr;
 var say= document.getElementById("inputMess");
 function printToDom(){
     let name = checkname();
@@ -107,10 +108,10 @@ function printToDom(){
     let dateTime = date+`-`+time;
 	content.innerHTML = 
 	`<div class='card-block'>
-	<h4 class='card-title'>Post #${count} <br> ${dateTime}<br> <strong>BY: ${name}</strong></h4>
-	<p class='card-text'>${input.value}</p>
-	<button class='are btn btn-danger btn-sm'>Delete</button>
-    <button class="btn edit btn-primary btn-sm">Edit</button>
+        <h4 class='card-title'>Post #${count} <br> ${dateTime}<br> <strong>BY: ${name}</strong></h4>
+        <p class='card-text'>${input.value}</p>
+        <button class='are btn btn-danger btn-sm'>Delete</button>
+        <button class="btn edit btn-primary btn-sm">Edit</button>
 	</div></div>`;
 
     document.getElementById("messageBoard").prepend(content);
@@ -126,12 +127,13 @@ function printToDom(){
                 function edit(){
                     say.focus();
                     let guy = event.target.parentNode.children[1].innerHTML
-                    console.log("", guy);
-                        
+//                    console.log("", guy);
 
 //                    console.log('d', x);
                     say.value = guy;
 //                    console.log('eee', say.value);
+                    arr = this;
+                    console.log('we', arr.parentNode.children[1].innerHTML);
                     
                 } 
                 say.addEventListener("keydown", edits);
@@ -148,11 +150,13 @@ function printToDom(){
 
 function edits(event){
   
+                        
+//                            var arr = this
                         if(event.keyCode == 13) {
-                            let arr = this
-                            arr.innerHTML = document.getElementById('inputMess').value;
+                            console.log('2', arr);
+                            arr.parentNode.children[1].innerHTML = document.getElementById('inputMess').value;
                             
-                            say.removeEventListener("keydown", edits);
+//                            say.removeEventListener("keydown", edits);
                         }
 
                     }
