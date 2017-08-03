@@ -9,7 +9,7 @@ let oldpost=[];
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"];
 
-/////////////////Print Parsed Data////////////////////////
+/////////////////Load Parsed Data////////////////////////
 {
         Chat.show= function(a){
         a.forEach(function(element){
@@ -45,46 +45,7 @@ var monthNames = ["January", "February", "March", "April", "May", "June",
 }
 Chat.loadmsg(Chat.show);
 
-/////////////////////ENTER KEY AND INPUT FOCUS///////////////////////////
-var input = document.getElementById('inputMess');
-var kill = document.getElementById('kill');
-input.onkeydown = enter;
-input.onfocus = check;
-input.addEventListener("focus", function() {
-    if (count>22) {
-        readless();
-    }
-})
-var add = document.getElementById('add');
-add.addEventListener("click",()=>{
-    readless();
-    check();
-    printToDom();
-});
-
-function check() {
-    if(document.getElementsByClassName("card").length===0){
-        count=1;
-    }
-}
-
-function enter(e){
-        if(e.keyCode == 13 && isEditing === false) {
-            printToDom();
-        }
-};
-
-function checkname() {
-    if (document.getElementById("radio1").checked===true) {
-        username = users.names[0];
-        return username
-    }
-    else {
-        username = users.names[1];
-        return username
-    }
-}
-
+/////////////////////////Print User Messages///////////////////////////////
 var arr;
 var say = document.getElementById("inputMess");
 function printToDom(){
@@ -141,6 +102,82 @@ function edits(event){
     input.focus();
     }}
 
+
+/////////////////////ENTER KEY AND INPUT FOCUS///////////////////////////
+var input = document.getElementById('inputMess');
+var kill = document.getElementById('kill');
+input.onkeydown = enter;
+input.onfocus = check;
+input.addEventListener("focus", function() {
+    if (count>22) {
+        readless();
+    }
+})
+var add = document.getElementById('add');
+add.addEventListener("click",()=>{
+    readless();
+    check();
+    printToDom();
+});
+
+function check() {
+    if(document.getElementsByClassName("card").length===0){
+        count=1;
+    }
+}
+
+function enter(e){
+        if(e.keyCode == 13 && isEditing === false) {
+            printToDom();
+        }
+};
+
+function checkIfEmpty() {
+    let div = document.getElementById('messageBoard');
+    if (div.innerHTML !== "") {
+        kill.removeAttribute("disabled");
+    }else if (div.innerHTML === "") {
+        kill.setAttribute("disabled", true);
+    };
+}
+
+function checkname() {
+    if (document.getElementById("radio1").checked===true) {
+        username = users.names[0];
+        return username
+    }
+    else {
+        username = users.names[1];
+        return username
+    }
+}
+
+kill.addEventListener('click',()=>{
+    let div = document.getElementById('messageBoard');
+    div.innerHTML = "";
+    Chat.clearmsg();
+    checkIfEmpty();
+    oldpost=[];
+    document.getElementById("oldmsg").innerHTML='';
+        
+});
+
+///////////////////Modal JS///////////////////////////
+document.getElementById("themechange").addEventListener("click",()=> {
+    var bgcolor;
+    var fontcolor;
+    var cardcolor;
+    bgcolor = document.getElementById("bgcolor").value;
+    fontcolor = document.getElementById("fontcolor").value;
+    cardcolor = document.getElementById("cardcolor").value;     
+    document.getElementById("body").style.backgroundColor=bgcolor;
+    document.getElementById("messageBoard").style.color=fontcolor;
+    document.getElementById("messageBoard").childNodes.forEach((a)=>{
+        a.style.backgroundColor=cardcolor;
+    });                             
+    document.getElementById("themechange").setAttribute("data-dismiss","modal");   
+});
+/////////////////////Theme Chooser/////////////////////////
 var darkTheme = document.getElementById('tog1');
 darkTheme.addEventListener('click', ()=>{
 let msgbrd = document.getElementById('messageBoard');
@@ -173,25 +210,9 @@ if (bigTheme.checked === true){
 }  
 }
 );
-  
-kill.addEventListener('click',()=>{
-    let div = document.getElementById('messageBoard');
-    div.innerHTML = "";
-    Chat.clearmsg();
-    checkIfEmpty();
-    oldpost=[];
-    document.getElementById("oldmsg").innerHTML='';
-        
-});
 
-function checkIfEmpty() {
-    let div = document.getElementById('messageBoard');
-    if (div.innerHTML !== "") {
-        kill.removeAttribute("disabled");
-    }else if (div.innerHTML === "") {
-        kill.setAttribute("disabled", true);
-    };
-}
+
+////////////////////////Message Limit and Show Old Messages////////////////////////////////////
 
 function check20() {
     let content;
@@ -236,18 +257,3 @@ function readless() {
         
         
 }
-///////////////////Modal JS///////////////////////////
-document.getElementById("themechange").addEventListener("click",()=> {
-    var bgcolor;
-    var fontcolor;
-    var cardcolor;
-    bgcolor = document.getElementById("bgcolor").value;
-    fontcolor = document.getElementById("fontcolor").value;
-    cardcolor = document.getElementById("cardcolor").value;     
-    document.getElementById("body").style.backgroundColor=bgcolor;
-    document.getElementById("messageBoard").style.color=fontcolor;
-    document.getElementById("messageBoard").childNodes.forEach((a)=>{
-        a.style.backgroundColor=cardcolor;
-    });                             
-    document.getElementById("themechange").setAttribute("data-dismiss","modal");   
-});
