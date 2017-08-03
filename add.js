@@ -115,7 +115,7 @@ input.addEventListener("focus", function() {
 })
 var add = document.getElementById('add');
 add.addEventListener("click",()=>{
-    readless();
+    input.focus();
     check();
     printToDom();
 });
