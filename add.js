@@ -109,7 +109,7 @@ var kill = document.getElementById('kill');
 input.onkeydown = enter;
 input.onfocus = check;
 input.addEventListener("focus", function() {
-    if (count>22) {
+    if (count>21) {
         readless();
     }
 })
