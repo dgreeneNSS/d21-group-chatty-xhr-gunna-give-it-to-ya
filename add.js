@@ -1,11 +1,17 @@
-var count = 1;
+let count = 6;
 var users = {
   names: ["Guest","DMX"]
 };
 var isEditing = false;
 var username;
 var audio = new Audio('dog.mp3');
-function show(a){
+let oldpost=[];
+var monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
+
+/////////////////Print Parsed Data////////////////////////
+{
+        Chat.show= function(a){
         a.forEach(function(element){
             let from = element.from;
             let message = element.message;
@@ -19,57 +25,54 @@ function show(a){
                               </div>
                             </div>`            
         });
-    
         for (var i = 0; i < document.getElementsByClassName('aref').length; i++) {
             document.getElementsByClassName("aref")[i].addEventListener("click",function() { this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
                 checkIfEmpty(); 
             })
         }
-
-    for (var i = 0; i < document.getElementsByClassName("edit").length; i++) {
+        for (var i = 0; i < document.getElementsByClassName("edit").length; i++) {
             document.getElementsByClassName("edit")[i].addEventListener("click", edit)
                 function edit(){
                     say.focus();
                     let guy = event.target.parentNode.children[1].innerHTML
-//                    console.log("", guy);
-//                    console.log('d', x);
                     say.value = guy;
-//                    console.log('eee', say.value);
                     arr = this;
-                    console.log('we', arr.parentNode.children[1].innerHTML);
-                    
+                    isEditing = true;
                 } 
-                say.addEventListener("keydown", edits);
-                        };     
+            say.addEventListener("keydown", edits);
+        };     
     }
-Chat.loadmsg(show);
+}
+Chat.loadmsg(Chat.show);
 
+/////////////////////ENTER KEY AND INPUT FOCUS///////////////////////////
 var input = document.getElementById('inputMess');
-var add = document.getElementById('add');
 var kill = document.getElementById('kill');
-
 input.onkeydown = enter;
-
 input.onfocus = check;
+input.addEventListener("focus", function() {
+    if (count>22) {
+        readless();
+    }
+})
+var add = document.getElementById('add');
 add.addEventListener("click",()=>{
+    readless();
     check();
     printToDom();
-    
 });
+
 function check() {
-	if(document.getElementsByClassName("are").length===0){
-	count=1;
-	}
+    if(document.getElementsByClassName("card").length===0){
+        count=1;
+    }
 }
 
 function enter(e){
-		if(e.keyCode == 13 && isEditing === false) {
-		 printToDom();
-		}
+        if(e.keyCode == 13 && isEditing === false) {
+            printToDom();
+        }
 };
-
-var monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"];
 
 function checkname() {
     if (document.getElementById("radio1").checked===true) {
@@ -81,31 +84,32 @@ function checkname() {
         return username
     }
 }
+
 var arr;
-var say= document.getElementById("inputMess");
+var say = document.getElementById("inputMess");
 function printToDom(){
     let name = checkname();
-	let content = document.createElement("div");
-	content.setAttribute("class", "af card col-md-12 fades");
-	let today = new Date
+    let content = document.createElement("div");
+    content.setAttribute("class", "af card col-md-12 fades");
+    let today = new Date
 
-	let date = monthNames[today.getMonth()]+' '+today.getDate();
+    let date = monthNames[today.getMonth()]+' '+today.getDate();
     let time = today.getHours() + ":" + today.getMinutes();
     let dateTime = date+`-`+time;
-	content.innerHTML = 
-	`<div class='card-block'>
+    content.innerHTML = 
+    `<div class='card-block'>
         <h4 class='card-title'>Post #${count} <br> ${dateTime}<br> <strong>BY: ${name}</strong></h4>
         <p class='card-text'>${input.value}</p>
         <button class='are btn btn-danger btn-sm'>Delete</button>
         <button class="btn edit btn-primary btn-sm">Edit</button>
-	</div></div>`;
+    </div></div>`;
 
     document.getElementById("messageBoard").prepend(content);
     let y = document.getElementsByClassName("are");
-    	                      
+                              
     document.getElementsByClassName("are")[0].addEventListener("click",function() {          
         this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
-        checkIfEmpty();                       	
+        checkIfEmpty();                         
     })
     
     for (var i = 0; i < document.getElementsByClassName("edit").length; i++) {
@@ -113,30 +117,28 @@ function printToDom(){
                 function edit(){
                     say.focus();
                     let guy = event.target.parentNode.children[1].innerHTML
-//                    console.log("", guy);
-//                    console.log('d', x);
                     say.value = guy;
-//                    console.log('eee', say.value);
                     arr = this;
                     console.log('we', arr.parentNode.children[1].innerHTML);
                     isEditing = true;
-                    
                 } 
                 say.addEventListener("keydown", edits);
-                        };
-                            
+            };               
     count+=1;
     checkIfEmpty();
     check20();
-    // input.value='';
+    input.value='';
     input.focus();
 };
+
 function edits(event){
 //var arr = this
     if(event.keyCode == 13 && isEditing === true) {
         console.log('2', arr);
         arr.parentNode.children[1].innerHTML = document.getElementById('inputMess').value;
         isEditing = false;
+        input.value='';
+    input.focus();
     }}
 
 var darkTheme = document.getElementById('tog1');
@@ -177,6 +179,9 @@ kill.addEventListener('click',()=>{
     div.innerHTML = "";
     Chat.clearmsg();
     checkIfEmpty();
+    oldpost=[];
+    document.getElementById("oldmsg").innerHTML='';
+        
 });
 
 function checkIfEmpty() {
@@ -187,23 +192,50 @@ function checkIfEmpty() {
         kill.setAttribute("disabled", true);
     };
 }
-var oldpost=[];
+
 function check20() {
     let content;
     let div = document.getElementsByClassName('card');
     let readmore=document.createElement("div");
-    readmore.innerHTML = `<button type="button">press</button>`;
+    readmore.innerHTML = `<button type="button" class="btn btn-success" onclick="readmore();">Read More....</button>`;
     for (var i = div.length-1;i<=div.length; i++){
+
         if (i > 20){
             content = div[i-1];
-            for (var j =i; j<i+1;j++) {
-                document.getElementById("messageBoard").removeChild(document.getElementById("messageBoard").lastChild)
-            }
             
-            oldpost.push(content);                    
+            document.getElementById("messageBoard").removeChild(document.getElementById("messageBoard").lastChild)
+            oldpost.push(content); 
+            document.getElementById("oldmsg").append(readmore);
+                                                      
             };
-         };           
+
+    }; 
+    if (count> 22) {
+                document.getElementById("oldmsg").removeChild(document.getElementById("oldmsg").firstChild)
+            }          
 };
+
+function readmore() {
+    let readless=document.createElement("div");
+    readless.innerHTML = `<button type="button" class="btn btn-danger" onclick="readless();">Read Less....</button>`;
+    document.getElementById("oldmsg").removeChild(document.getElementById("oldmsg").firstChild)
+    document.getElementById("oldmsg").append(readless);
+        
+    oldpost.forEach((a)=>{
+        document.getElementById("oldmsg").append(a);
+
+    })
+}
+
+function readless() {
+    document.getElementById("oldmsg").innerHTML = '';
+    let div = document.getElementsByClassName('card');
+    let readmore=document.createElement("div");
+    readmore.innerHTML = `<button type="button" class="btn btn-success" onclick="readmore();">Read More....</button>`;
+    document.getElementById("oldmsg").append(readmore);
+        
+        
+}
 ///////////////////Modal JS///////////////////////////
 document.getElementById("themechange").addEventListener("click",()=> {
     var bgcolor;
