@@ -15,7 +15,7 @@ var monthNames = ["January", "February", "March", "April", "May", "June",
         a.forEach(function(element){
             let from = element.from;
             let message = element.message;
-            document.getElementById("messageBoard").innerHTML += 
+            $("#messageBoard").html( 
                             `<div class="af card col-md-12 fades">
                               <div class="card-block">
                                 <h4 class="card-title">${from}</h4>
@@ -23,9 +23,9 @@ var monthNames = ["January", "February", "March", "April", "May", "June",
                                 <button class="btn aref btn-danger btn-sm">Delete</button>
                                 <button class="btn edit btn-primary btn-sm">Edit</button>
                               </div>
-                            </div>`            
+                            </div>` )         
         });
-        for (var i = 0; i < document.getElementsByClassName('aref').length; i++) {
+        for (var i = 0; i < $('.aref').length; i++) {
             document.getElementsByClassName("aref")[i].addEventListener("click",function() { this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
                 checkIfEmpty(); 
             })
