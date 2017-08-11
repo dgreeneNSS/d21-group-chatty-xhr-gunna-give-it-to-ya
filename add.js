@@ -175,9 +175,9 @@ $("#themechange").click(function() {
     bgcolor = $("#bgcolor").val;
     fontcolor = $("#fontcolor").val;
     cardcolor = $("#cardcolor").val;     
-    document.getElementById("body").style.backgroundColor=bgcolor;
-    document.getElementById("messageBoard").style.color=fontcolor;
-    document.getElementById("messageBoard").childNodes.forEach((a)=>{
+    $("#body").style.backgroundColor=bgcolor;
+    $("#messageBoard").style.color=fontcolor;
+    $("#messageBoard").childNodes.forEach((a)=>{
         a.style.backgroundColor=cardcolor;
     });                             
     document.getElementById("themechange").setAttribute("data-dismiss","modal");   
@@ -189,7 +189,7 @@ let msgbrd = $('#messageBoard');
 let div = $('.card');
 
 if (darkTheme.checked === true){
-    document.getElementsByClassName("body")[0].classList.toggle('darkTheme');
+    $(".body")[0].classList.toggle('darkTheme');
     audio.play();
     msgbrd.classList.toggle('grey');
     for (var i = 0; i < div.length; i++){
@@ -221,7 +221,7 @@ if (bigTheme.checked === true){
 
 function check20() {
     let content;
-    let div = document.getElementsByClassName('card');
+    let div = $('.card');
     let readmore=document.createElement("div");
     readmore.innerHTML = `<button type="button" class="btn btn-success" onclick="readmore();">Read More....</button>`;
     for (var i = div.length-1;i<=div.length; i++){
@@ -237,15 +237,15 @@ function check20() {
 
     }; 
     if (count> 22) {
-                document.getElementById("oldmsg").removeChild(document.getElementById("oldmsg").firstChild)
+                $("#oldmsg").removeChild($("#oldmsg").firstChild)
             }          
 };
 
 function readmore() {
     let readless=document.createElement("div");
     readless.innerHTML = `<button type="button" class="btn btn-danger" onclick="readless();">Read Less....</button>`;
-    document.getElementById("oldmsg").removeChild(document.getElementById("oldmsg").firstChild)
-    document.getElementById("oldmsg").append(readless);
+    $("#oldmsg").removeChild($("#oldmsg").firstChild)
+    $("#oldmsg").append(readless);
         
     oldpost.forEach((a)=>{
         document.getElementById("oldmsg").append(a);
@@ -254,11 +254,11 @@ function readmore() {
 }
 
 function readless() {
-    document.getElementById("oldmsg").innerHTML = '';
-    let div = document.getElementsByClassName('card');
+    $("#oldmsg").html('');
+    let div = $('.card');
     let readmore=document.createElement("div");
     readmore.innerHTML = `<button type="button" class="btn btn-success" onclick="readmore();">Read More....</button>`;
-    document.getElementById("oldmsg").append(readmore);
+    $("#oldmsg").append(readmore);
         
         
 }
